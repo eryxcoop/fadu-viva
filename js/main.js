@@ -1,43 +1,98 @@
-var s = Snap("#fadu-viva");
-var backgroundLayer = s.group();
-var busesLayer = s.group();
+class App {
+    static SVG_ID = "fadu-viva";
 
-var fondo = Snap.load('img/fondo.svg', function (loadedBackgroundFragment) {
-  backgroundLayer.append(loadedBackgroundFragment);
-});
+    static IMAGES_URLS = {
+        BACKGROUND: 'img/fondo.svg'
+    };
 
-var colectivo = Snap.load('img/bondi.svg', function (loadedBusFragment) {
-  var loadeBus = busesLayer.append(loadedBusFragment);
-  var identityMatrix = new Snap.Matrix();
-  identityMatrix.scale(0.2);
-  identityMatrix.translate(8000, 1550);
-  loadeBus.transform(identityMatrix);
-  var matrixToAnimateBus = new Snap.Matrix();
-  matrixToAnimateBus.scale(0.2);
-  matrixToAnimateBus.translate(-1500, 1550);
-  loadeBus.animate({transform: matrixToAnimateBus}, 5000)
-});
+    static LAYERS_NAMES = {
+        BACKGROUND: "background-layer",
+        CARS_FIRST_LANE: "cars-first-lane",
+        BUSES_FIRST_LANE: "buses-first-lane",
+        BUSES_SECOND_LANE: "buses-second-lane",
+        TRAIN_LANE: "layer-train",
+        CARS_SECOND_LANE: "cars-second-lane",
+    };
 
-// TODO: esto era una prueba de concepto, no sirve. deberiamos agregar todo al busesLayer (por el tema de transparencias) pero poder actuar sobre cada bondi en particular.
-var colectivo2 = Snap.load('img/bondi.svg', function (loadedBusFragment) {
-  var bus2Layer = s.group();
-  var loadeBus = bus2Layer.append(loadedBusFragment);
-  var identityMatrix = new Snap.Matrix();
-  identityMatrix.scale(0.2);
-  identityMatrix.translate(8000, 1650);
-  loadeBus.transform(identityMatrix);
-  var matrixToAnimateBus = new Snap.Matrix();
-  matrixToAnimateBus.scale(0.2);
-  matrixToAnimateBus.translate(-1500, 1650);
-  loadeBus.animate({transform: matrixToAnimateBus}, 6500)
-});
+    static ASSETS_NAMES = {
+        TRAIN: "Tren"
+    };
+
+    constructor() {
+        this.paper = undefined;
+        this.layers = {
+            train: undefined,
+        };
+        this.assets = {
+            train: undefined,
+        };
+
+        this.services = {
+            transit: undefined,
+            train: undefined,
+            weather: undefined,
+            time: undefined,
+        }
+    }
+
+    setup() {
+        this.initializePaper();
+        this.loadBackground(function() {
+            this.fetchAllLayers();
+            this.fetchAllAssets();
+        }.bind(this));
+    }
+
+    initializePaper() {
+        this.paper = Snap(`#${this.constructor.SVG_ID}`);
+    }
+
+    loadBackground(onBackgroundLoad) {
+        this.assets.background = Snap.load(this._imagesURLs().BACKGROUND, function (fragment) {
+            this.paper.add(fragment);
+            onBackgroundLoad();
+        }.bind(this));
+    }
+
+    fetchAllLayers() {
+        this.layers.train = this.paper.select(`#${this._layersNames().TRAIN_LANE}`)
+    }
+
+    fetchAllAssets() {
+        this.assets.train = this.layers.train.select(`#${this._assetsNames().TRAIN}`);
+        // TODO: train initial position (useless afterwards)
+        this.assets.train.transform(new Snap.Matrix().translate(-1200, 0))
+    }
+
+    animateTrain() {
+        let matrixToAnimateTrainFromLeftToRight = new Snap.Matrix();
+        matrixToAnimateTrainFromLeftToRight.translate(2000, 0);
+        this.assets.train.animate({transform: matrixToAnimateTrainFromLeftToRight}, 2000);
+
+    }
+
+    _imagesURLs() {
+        return this.constructor.IMAGES_URLS;
+    }
+
+    _layersNames() {
+        return this.constructor.LAYERS_NAMES;
+    }
+
+    _assetsNames() {
+        return this.constructor.ASSETS_NAMES;
+    }
+}
+
+let app = new App();
+app.setup();
+setTimeout(app.animateTrain.bind(app), 3000);
 
 
 /*
 
   Pasos ideales:
 
-  setup: construir fondo y los distintos layers, en orden, para tener las transparencias bien hechas
   tener distintas animaciones prearmadas (ej: transitoBondisAlto, transitoAutosBajo, etc)
      - tener helpers para animar un bondi X con cierta animacion e easings (ej: se frena, arranca)
      - borrar cada bondi cada vez que se va de pantalla, o probar como anda sin borrar. capaz empieza explotar por recursos
@@ -45,9 +100,5 @@ var colectivo2 = Snap.load('img/bondi.svg', function (loadedBusFragment) {
 
   a analizar: animaciones con colores. hay que usar animate, fill y select (ej: el cielo)
 
-  NOTA: no tenmos transformaciones porcentuales. el tamaño del viewport svg nos va a liquidar porque cambian las escalas y las posiciones.
-  ej: el bondi con viewport mas grande hay que achicarlo mas que 0.2, y moverlo a otras posiciones
-  Podemos hacer settings para una resolucion puntual o, idealmente, encontrar una relacion porcentual para las posiciones y tamaños.
-
- */
+*/
 
