@@ -1,3 +1,5 @@
+import {ApiClient, RemoteRequester} from "./communication";
+
 class App {
     static SVG_ID = "fadu-viva";
 
@@ -88,6 +90,10 @@ let app = new App();
 app.setup();
 setTimeout(app.animateTrain.bind(app), 3000);
 
+
+const requester = new RemoteRequester("http://127.0.0.1:5000/");
+const api_client = new ApiClient(requester);
+api_client.getTrafficStatus((response) => {console.log(response)});
 
 /*
 
