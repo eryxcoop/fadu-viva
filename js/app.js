@@ -11,6 +11,7 @@ class App {
         this._pollingTimeout = pollingTimeout;
         this._apiClient = new ApiClient(new RemoteRequester("http://127.0.0.1:5000/"));
 
+        this.pollForStatusAndAnimate = this.pollForStatusAndAnimate.bind(this);
         this._getStatusAndAnimate = this._getStatusAndAnimate.bind(this);
         this._animateCanvasWith = this._animateCanvasWith.bind(this);
     }
