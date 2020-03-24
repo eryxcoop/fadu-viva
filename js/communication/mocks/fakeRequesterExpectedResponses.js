@@ -1,10 +1,10 @@
-import {GetTrafficStatusEndpoint} from "../endpoints/GetTrafficStatusEndpoint.js";
-import {GetTrafficStatusSuccessfulResponse} from "../responses/GetTrafficStatusSuccessfulResponse.js";
+import {GetStatusEndpoint} from "../endpoints/GetStatusEndpoint.js";
+import {GetStatusSuccessfulResponse} from "../responses/GetStatusSuccessfulResponse.js";
 
 
 const fakeRequesterExpectedResponses = () => {
     return {
-        [GetTrafficStatusEndpoint.name]: GetTrafficStatusSuccessfulResponse,
+        [GetStatusEndpoint.name]: GetStatusSuccessfulResponse,
     }
 };
 

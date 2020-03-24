@@ -1,5 +1,5 @@
 import {ServerErrorResponse} from "../responses/generalResponses/ServerErrorResponse.js";
-import {GetTrafficStatusEndpoint} from "../endpoints/GetTrafficStatusEndpoint.js";
+import {GetStatusEndpoint} from "../endpoints/GetStatusEndpoint.js";
 
 
 class ApiClient {
@@ -17,9 +17,9 @@ class ApiClient {
         return onResponse(response);
     }
 
-    getTrafficStatus(onResponse) {
+    getStatus(onResponse) {
         return this._requester.call({
-            endpoint: new GetTrafficStatusEndpoint(),
+            endpoint: new GetStatusEndpoint(),
             onResponse: (response) => this._handleResponse(response, onResponse)
         });
     }

@@ -2,11 +2,17 @@ import Canvas from "./canvas.js";
 import Animator from "./animator.js";
 import {ApiClient, RemoteRequester} from "./communication";
 
+const A_MINUTE = 60 * 1000;
+
 class App {
-    constructor() {
+    constructor(pollingTimeout = A_MINUTE) {
         this._canvas = new Canvas();
         this._animator = undefined;
-        this.apiClient = new ApiClient(new RemoteRequester("http://127.0.0.1:5000/"));
+        this._pollingTimeout = pollingTimeout;
+        this._apiClient = new ApiClient(new RemoteRequester("http://127.0.0.1:5000/"));
+
+        this._getStatusAndAnimate = this._getStatusAndAnimate.bind(this);
+        this._animateCanvasWith = this._animateCanvasWith.bind(this);
     }
 
     initialize(callback) {
@@ -14,19 +20,19 @@ class App {
             this._animator = new Animator(canvas);
             callback(this);
         }.bind(this));
-
     }
 
-    animator() {
-        return this._animator;
+    pollForStatusAndAnimate() {
+        this._getStatusAndAnimate();
+        setInterval(this._getStatusAndAnimate, this._pollingTimeout);
     }
 
-    canvas() {
-        return this._canvas;
+    _getStatusAndAnimate() {
+        this._apiClient.getStatus(this._animateCanvasWith);
     }
 
-    trafficService() {
-        return this.apiClient;
+    _animateCanvasWith(statusResponse) {
+        this._animator.animateAccordingTo(statusResponse);
     }
 }
 

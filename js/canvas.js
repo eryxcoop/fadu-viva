@@ -11,20 +11,23 @@ class Canvas {
         BUSES_FIRST_LANE: "buses-first-lane",
         BUSES_SECOND_LANE: "buses-second-lane",
         TRAIN_LANE: "layer-train",
-        CARS_SECOND_LANE: "cars-second-lane",
+        CARS_SECOND_LANE: "Autopista",
     };
 
     static ASSETS_NAMES = {
-        TRAIN: "Tren"
+        TRAIN: "Tren",
+        CARS_SECOND_LANE: "Autos_1_"
     };
 
     constructor() {
         this.paper = undefined;
         this.layers = {
             train: undefined,
+            cars_second_lane: undefined,
         };
         this.assets = {
             train: undefined,
+            cars_second_lane: undefined,
         };
     }
 
@@ -49,13 +52,18 @@ class Canvas {
     }
 
     fetchAllLayers() {
-        this.layers.train = this.paper.select(`#${this._layersNames().TRAIN_LANE}`)
+        this.layers.train = this.paper.select(`#${this._layersNames().TRAIN_LANE}`);
+        this.layers.cars_second_lane = this.paper.select(`#${this._layersNames().CARS_SECOND_LANE}`)
     }
 
     fetchAllAssets() {
         this.assets.train = this.layers.train.select(`#${this._assetsNames().TRAIN}`);
         // TODO: train initial position (useless afterwards)
-        this.assets.train.transform(new Snap.Matrix().translate(-1200, 0))
+        this.assets.train.transform(new Snap.Matrix().translate(-1200, 0));
+
+        this.assets.cars_second_lane = this.layers.cars_second_lane.select(`#${this._assetsNames().CARS_SECOND_LANE}`);
+        // TODO: cars initial position (useless afterwards)
+        this.assets.cars_second_lane.transform(new Snap.Matrix().translate(-2000, 0));
     }
 
     _imagesURLs() {
