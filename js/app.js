@@ -1,17 +1,12 @@
 import Canvas from "./canvas.js";
 import Animator from "./animator.js";
+import {ApiClient, RemoteRequester} from "./communication";
 
 class App {
     constructor() {
         this._canvas = new Canvas();
         this._animator = undefined;
-
-        this.services = {
-            transit: undefined,
-            train: undefined,
-            weather: undefined,
-            time: undefined,
-        }
+        this.apiClient = new ApiClient(new RemoteRequester("http://127.0.0.1:5000/"));
     }
 
     initialize(callback) {
@@ -28,6 +23,10 @@ class App {
 
     canvas() {
         return this._canvas;
+    }
+
+    trafficService() {
+        return this.apiClient;
     }
 }
 
