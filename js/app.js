@@ -1,6 +1,7 @@
 import Canvas from "./canvas.js";
 import Animator from "./animator.js";
 import {ApiClient, RemoteRequester} from "./communication";
+import {GetStatusSuccessfulResponse} from "./communication/responses/GetStatusSuccessfulResponse.js";
 
 const A_MINUTE = 60 * 1000;
 
@@ -24,8 +25,8 @@ class App {
     }
 
     pollForStatusAndAnimate() {
-        this._getStatusAndAnimate();
-        setInterval(this._getStatusAndAnimate, this._pollingTimeout);
+        // this._getStatusAndAnimate();
+        // setInterval(this._getStatusAndAnimate, this._pollingTimeout);
     }
 
     _getStatusAndAnimate() {
