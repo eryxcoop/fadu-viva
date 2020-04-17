@@ -2,12 +2,12 @@ class Canvas {
     static SVG_ID = "fadu-viva";
 
     static IMAGES_URLS = {
-        BACKGROUND: 'img/fondo.svg'
+        BACKGROUND: 'img/fadu-noche.svg'
     };
 
     static ASSETS_NAMES = {
         TRAIN: "Tren",
-        CARS_SECOND_LANE: "Autos_1_",
+        CARS_SECOND_LANE: "Autos-2",
     };
 
     constructor() {
@@ -38,8 +38,6 @@ class Canvas {
     }
 
     fetchAllAssets() {
-        this.paper.select(`#${this._assetsNames().TRAIN}`).remove();
-
         this.assets.cars_second_lane = document.querySelectorAll(`#${this._assetsNames().CARS_SECOND_LANE}`);
 
         gsap.set(this.assets.cars_second_lane, {x: -2000});
