@@ -2,19 +2,91 @@ class Canvas {
     static SVG_ID = "fadu-viva";
 
     static IMAGES_URLS = {
-        BACKGROUND: 'img/fadu-noche.svg'
+        BACKGROUND: 'img/fadu-viva.svg'
     };
 
     static ASSETS_NAMES = {
-        TRAIN: "Tren",
-        CARS_SECOND_LANE: "Autos-2",
+        CARS_FIRST_LANE: [
+            'Volkswagen_Gol_2015',
+            'Up_naranja',
+            'Peugeot_206_blanco',
+            'Gold_trend_blanco',
+            'Peugeot_206_rojo',
+            'Camion'
+        ],
+        CARS_SECOND_LANE: [
+            'Gold_trend_blanco-2',
+            'Peugeot_206_azul',
+            'Up_amarillo',
+            'Fiorino',
+            'Fiesta_azul',
+            'Ecosport_verde',
+            'Up_amarillo-2'
+        ],
+        ARRIVING_BUSES: {
+            166: '_166_llegada',
+            160: '_160_llegada',
+            107: '_107_llegada',
+            45: '_45_llegada',
+            42: '_42_llegada',
+            37: '_37_llegada',
+            34: '_34_llegada',
+            33: '_33_llegada',
+            28: '_28_llegada',
+        },
+        DEPARTING_BUSES: {
+            166: '_166_salida',
+            160: '_160_salida',
+            107: '_107_salida',
+            45: '_45_salida',
+            42: '_42_salida',
+            37: '_37_salida',
+            34: '_34_salida',
+            33: '_33_salida',
+            28: '_28_salida',
+        },
+    };
+
+    static LOCATION_OFFSETS = {
+        BUS_STOP_OFFSETS: {
+            ARRIVING_BUSES: {
+                166: -1500,
+                160: -1900,
+                107: -1100,
+                45: -700,
+                42: -1480,
+                37: -1880,
+                34: -1080,
+                33: -680,
+                28: -2400,
+            },
+            DEPARTING_BUSES: {
+                166: 1300,
+                160: 1700,
+                107: 900,
+                45: 500,
+                42: 1280,
+                37: 1680,
+                34: 880,
+                33: 480,
+                28: 2200,
+            },
+        },
+        ARRIVING_BUSES_START_OFFSET: 500,
+        DEPARTING_BUSES_START_OFFSET: -600,
+        ARRIVING_BUSES_END_OFFSET: -2800,
+        DEPARTING_BUSES_END_OFFSET: 2800,
+        CARS_START_OFFSET: -500,
+        CARS_END_OFFSET: 2800
     };
 
     constructor() {
         this.paper = undefined;
         this.assets = {
-            train: undefined,
+            cars_first_lane: undefined,
             cars_second_lane: undefined,
+            arriving_buses: undefined,
+            departing_buses: undefined,
         };
     }
 
@@ -22,6 +94,7 @@ class Canvas {
         this.initializePaper();
         this.loadBackground(function () {
             this.fetchAllAssets();
+            this.initializeScene();
             callback(this);
         }.bind(this));
     }
@@ -38,11 +111,57 @@ class Canvas {
     }
 
     fetchAllAssets() {
-        this.assets.cars_second_lane = document.querySelectorAll(`#${this._assetsNames().CARS_SECOND_LANE}`);
+        this._fetchCars();
+        this._fetchBuses();
+    }
 
-        gsap.set(this.assets.cars_second_lane, {x: -2000});
-        // gsap.set(autos, {opacity: 0.3});
-        gsap.to(this.assets.cars_second_lane, {duration: 6, repeat: -1, x: 2500});
+    initializeScene() {
+        // This should be set later and animated...
+        gsap.set('.Oscuridad', {opacity: 0});
+        gsap.set('.Iluminacion', {opacity: 0});
+
+        this._hideCars();
+        this._hideBuses();
+    }
+
+    carsStartOffset() {
+        return this._locationOffsets().CARS_START_OFFSET;
+    }
+
+    carsEndOffset() {
+        return this._locationOffsets().CARS_END_OFFSET;
+    }
+
+    getArrivingBus(busName) {
+        return this.assets.arriving_buses[busName];
+    }
+
+    getDepartingBus(busName) {
+        return this.assets.departing_buses[busName];
+    }
+
+    arrivingBusStopOffset(busName) {
+        return this._locationOffsets().BUS_STOP_OFFSETS.ARRIVING_BUSES[busName];
+    }
+
+    departingBusStopOffset(busName) {
+        return this._locationOffsets().BUS_STOP_OFFSETS.DEPARTING_BUSES[busName];
+    }
+
+    arrivingBusesStartOffset() {
+        return this._locationOffsets().ARRIVING_BUSES_START_OFFSET;
+    }
+
+    departingBusesStartOffset() {
+        return this._locationOffsets().DEPARTING_BUSES_START_OFFSET;
+    }
+
+    arrivingBusesEndOffset() {
+        return this._locationOffsets().ARRIVING_BUSES_END_OFFSET;
+    }
+
+    departingBusesEndOffset() {
+        return this._locationOffsets().DEPARTING_BUSES_END_OFFSET;
     }
 
     _imagesURLs() {
@@ -51,6 +170,41 @@ class Canvas {
 
     _assetsNames() {
         return this.constructor.ASSETS_NAMES;
+    }
+
+    _locationOffsets() {
+        return this.constructor.LOCATION_OFFSETS;
+    }
+
+    _fetchCars() {
+        this.assets.cars_first_lane = this._assetsNames().CARS_FIRST_LANE.map(carId => this.paper.select(`#${carId}`).node);
+        this.assets.cars_second_lane = this._assetsNames().CARS_SECOND_LANE.map(carId => this.paper.select(`#${carId}`).node);
+    }
+
+    _fetchBuses() {
+        gsap.set('.VidriosColectivo', {fill: '#83969b'});
+
+        this.assets.departing_buses = Object.fromEntries(
+            Object.entries(this._assetsNames().DEPARTING_BUSES).map(
+                ([busName, busId]) => [busName, this.paper.select(`#${busId}`).node]
+            )
+        );
+
+        this.assets.arriving_buses = Object.fromEntries(
+            Object.entries(this._assetsNames().ARRIVING_BUSES).map(
+                ([busName, busId]) => [busName, this.paper.select(`#${busId}`).node]
+            )
+        );
+    }
+
+    _hideCars() {
+        gsap.set(this.assets.cars_first_lane, {x: this.carsStartOffset()});
+        gsap.set(this.assets.cars_second_lane, {x: this.carsStartOffset()});
+    }
+
+    _hideBuses() {
+        gsap.set(Object.entries(this.assets.arriving_buses).map(([_, bus]) => bus), {x: this.arrivingBusesStartOffset()});
+        gsap.set(Object.entries(this.assets.departing_buses).map(([_, bus]) => bus), {x: this.departingBusesStartOffset()});
     }
 }
 

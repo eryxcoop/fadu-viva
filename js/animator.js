@@ -4,37 +4,36 @@ class Animator {
     }
 
     animateAccordingTo(statusResponse) {
-        this.animateTrafficInIntendenteCantilo(statusResponse.trafficStatus());
+        this._animateArrivingBuses(statusResponse.arrivingBuses(), this._canvas.arrivingBusesStartOffset(), this._canvas.arrivingBusesEndOffset());
+        this._animateDepartingBuses(statusResponse.departingBuses(), this._canvas.departingBusesStartOffset(), this._canvas.departingBusesEndOffset());
     }
 
-    animateTrain() {
-        let matrixToAnimateTrainFromLeftToRight = new Snap.Matrix();
-        matrixToAnimateTrainFromLeftToRight.translate(2000, 0);
-        this._canvas.assets.train.animate({transform: matrixToAnimateTrainFromLeftToRight}, 2000);
+    _animateArrivingBuses(busesName, startOffset, endingOffset) {
+        const timeline = gsap.timeline({paused: true});
+        busesName.map(busName => {
+            const busTween = this._animateBus(this._canvas.getArrivingBus(busName),
+                this._canvas.arrivingBusStopOffset(busName), startOffset, endingOffset);
+            timeline.add(busTween, `<${gsap.utils.random(1, 3)}`)
+        });
+        timeline.play();
     }
 
-    animateTrafficInIntendenteCantilo(trafficStatus) {
-        if (trafficStatus <= 3) {
-            this.animateLowTrafficInIntendenteCantilo();
-        } else if (trafficStatus <= 6) {
-            this.animateMediumTrafficInIntendenteCantilo();
-        } else {
-            this.animateHighTrafficInIntendenteCantilo();
-        }
+    _animateDepartingBuses(busesName, startOffset, endingOffset) {
+        const timeline = gsap.timeline({paused: true});
+        busesName.map(busName => {
+            const busTween = this._animateBus(this._canvas.getDepartingBus(busName),
+                this._canvas.departingBusStopOffset(busName), startOffset, endingOffset);
+            timeline.add(busTween, `<${gsap.utils.random(1, 3)}`)
+        });
+        timeline.play();
     }
 
-    animateLowTrafficInIntendenteCantilo() {
-        let matrixToAnimateCarsFromLeftToRight = new Snap.Matrix();
-        matrixToAnimateCarsFromLeftToRight.translate(2000, 0);
-        this._canvas.assets.cars_second_lane.animate({transform: matrixToAnimateCarsFromLeftToRight}, 4000);
-    }
-
-    animateMediumTrafficInIntendenteCantilo() {
-
-    }
-
-    animateHighTrafficInIntendenteCantilo() {
-
+    _animateBus(bus, busStopOffset, startOffset, endingOffset) {
+        const waitingTimeInSeconds = gsap.utils.random(2,5);
+        const timeline = gsap.timeline({onComplete: () => gsap.set(bus, {x: startOffset})});
+        timeline.to(bus, {ease: "power1.out", duration: "random(5,7)", x: busStopOffset});
+        timeline.to(bus, {ease: "power1.in", duration: "random(5,7)", x: endingOffset}, `+=${waitingTimeInSeconds}`);
+        return timeline;
     }
 }
 

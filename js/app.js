@@ -25,8 +25,8 @@ class App {
     }
 
     pollForStatusAndAnimate() {
-        // this._getStatusAndAnimate();
-        // setInterval(this._getStatusAndAnimate, this._pollingTimeout);
+        this._getStatusAndAnimate();
+        setInterval(this._getStatusAndAnimate, this._pollingTimeout);
     }
 
     _getStatusAndAnimate() {
