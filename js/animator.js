@@ -30,8 +30,8 @@ class Animator {
 
     _animateBus(bus, busStopOffset, startOffset, endingOffset) {
         const waitingTimeInSeconds = gsap.utils.random(2,5);
-        const timeline = gsap.timeline({onComplete: () => gsap.set(bus, {x: startOffset})});
-        timeline.to(bus, {ease: "power1.out", duration: "random(5,7)", x: busStopOffset});
+        const timeline = gsap.timeline();
+        timeline.fromTo(bus, {x: startOffset}, {ease: "power1.out", duration: "random(5,7)", x: busStopOffset});
         timeline.to(bus, {ease: "power1.in", duration: "random(5,7)", x: endingOffset}, `+=${waitingTimeInSeconds}`);
         return timeline;
     }
