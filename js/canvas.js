@@ -6,7 +6,8 @@ class Canvas {
     };
 
     static ASSETS_NAMES = {
-        SKY: 'Oscuridad',
+        SKY: 'Cielo',
+        SKY_LIGHT: 'Oscuridad',
         LIGHTS: 'Iluminacion',
         CARS_FIRST_LANE: [
             'Volkswagen_Gol_2015',
@@ -47,6 +48,8 @@ class Canvas {
             33: '_33_salida',
             28: '_28_salida',
         },
+        TRAIN_TO_RETIRO: 'TrenARetiro',
+        TRAIN_TO_VILLA_ROSA: 'TrenAVillaRosa',
     };
 
     static LOCATION_OFFSETS = {
@@ -74,12 +77,16 @@ class Canvas {
                 28: 2200,
             },
         },
-        ARRIVING_BUSES_START_OFFSET: 500,
-        DEPARTING_BUSES_START_OFFSET: -600,
-        ARRIVING_BUSES_END_OFFSET: -2800,
-        DEPARTING_BUSES_END_OFFSET: 2800,
+        ARRIVING_BUSES_START_OFFSET: 400,
+        DEPARTING_BUSES_START_OFFSET: -400,
+        ARRIVING_BUSES_END_OFFSET: -3400,
+        DEPARTING_BUSES_END_OFFSET: 3400,
         CARS_START_OFFSET: -500,
-        CARS_END_OFFSET: 2800
+        CARS_END_OFFSET: 3400,
+        TRAIN_TO_RETIRO_START_OFFSET: -3200,
+        TRAIN_TO_VILLA_ROSA_START_OFFSET: 3200,
+        TRAIN_TO_RETIRO_END_OFFSET: 3400,
+        TRAIN_TO_VILLA_ROSA_END_OFFSET: -3400,
     };
 
     constructor() {
@@ -89,8 +96,12 @@ class Canvas {
             cars_second_lane: undefined,
             arriving_buses: undefined,
             departing_buses: undefined,
+            train_to_retiro: undefined,
+            train_to_villa_rosa: undefined,
             sky: undefined,
-            lights: undefined,
+            sky_light: undefined,
+            street_lights: undefined,
+            building_lights: undefined,
         };
     }
 
@@ -116,14 +127,17 @@ class Canvas {
 
     fetchAllAssets() {
         this._fetchSky();
-        this._fetchLights();
+        this._fetchStreetLights();
+        this._fetchBuildingLights();
         this._fetchCars();
         this._fetchBuses();
+        this._fetchTrains();
     }
 
     initializeScene() {
         this._hideCars();
         this._hideBuses();
+        this._hideTrains();
         this._setDefaultDayTime();
     }
 
@@ -131,8 +145,16 @@ class Canvas {
         return this.assets.sky;
     }
 
-    lights() {
-        return this.assets.lights;
+    skyLight() {
+        return this.assets.sky_light;
+    }
+
+    streetLights() {
+        return this.assets.street_lights;
+    }
+
+    buildingLights() {
+        return this.assets.building_lights;
     }
 
     carsStartOffset() {
@@ -183,6 +205,22 @@ class Canvas {
         return this._locationOffsets().DEPARTING_BUSES_END_OFFSET;
     }
 
+    trainToRetiroStartOffset() {
+        return this._locationOffsets().TRAIN_TO_RETIRO_START_OFFSET;
+    }
+
+    trainToVillaRosaStartOffset() {
+        return this._locationOffsets().TRAIN_TO_VILLA_ROSA_START_OFFSET;
+    }
+
+    trainToRetiroEndOffset() {
+        return this._locationOffsets().TRAIN_TO_RETIRO_END_OFFSET;
+    }
+
+    trainToVillaRosaEndOffset() {
+        return this._locationOffsets().TRAIN_TO_VILLA_ROSA_END_OFFSET;
+    }
+
     _imagesURLs() {
         return this.constructor.IMAGES_URLS;
     }
@@ -196,19 +234,23 @@ class Canvas {
     }
 
     _fetchSky() {
-        this.assets.sky = this.paper.selectAll(`.${this._assetsNames().SKY}`).items.map(e => e.node);
+        // TODO normalize names to all ID or all classes
+        this.assets.sky = this.paper.select(`#${this._assetsNames().SKY}`).node;
+        this.assets.sky_light = this.paper.selectAll(`.${this._assetsNames().SKY_LIGHT}`).items.map(e => e.node);
     }
 
-    _fetchLights() {
+    _fetchStreetLights() {
         // TODO fix svg to math all the lights within the same classname
-        // this.assets.lights = this.paper.select(`${this._assetsNames().LIGHTS}`);
+        this.assets.street_lights = [];
+        this.assets.street_lights.push(...this.paper.selectAll('.Iluminacion').items.map(e => e.node));
+        this.assets.street_lights.push(...this.paper.selectAll('.Iluminacion2').items.map(e => e.node));
+        this.assets.street_lights.push(...this.paper.selectAll('.Iluminacion3').items.map(e => e.node));
+        this.assets.street_lights.push(this.paper.select('#Iluminacion-4').node);
+    }
 
-        this.assets.lights = [];
-        this.assets.lights.push(...this.paper.selectAll('.Iluminacion').items.map(e => e.node));
-        this.assets.lights.push(...this.paper.selectAll('.Iluminacion2').items.map(e => e.node));
-        this.assets.lights.push(this.paper.select('#Iluminacion').node);
-        this.assets.lights.push(this.paper.select('#Iluminacion-2').node);
-        this.assets.lights.push(this.paper.select('#Iluminacion-3').node);
+    _fetchBuildingLights() {
+        this.assets.building_lights = [];
+        this.assets.building_lights.push(...this.paper.selectAll('.Vidrios').items.map(e => e.node));
     }
 
     _fetchCars() {
@@ -217,7 +259,7 @@ class Canvas {
     }
 
     _fetchBuses() {
-        gsap.set('.VidriosColectivo', {fill: '#83969b'});
+        gsap.set('#VidriosColectivo', {fill: '#83969b'});
 
         this.assets.departing_buses = Object.fromEntries(
             Object.entries(this._assetsNames().DEPARTING_BUSES).map(
@@ -232,6 +274,11 @@ class Canvas {
         );
     }
 
+    _fetchTrains() {
+        this.assets.train_to_retiro = this.paper.select(`#${this._assetsNames().TRAIN_TO_RETIRO}`).node;
+        this.assets.train_to_villa_rosa = this.paper.select(`#${this._assetsNames().TRAIN_TO_VILLA_ROSA}`).node;
+    }
+
     _hideCars() {
         gsap.set(this.assets.cars_first_lane, {x: this.carsStartOffset()});
         gsap.set(this.assets.cars_second_lane, {x: this.carsStartOffset()});
@@ -242,9 +289,15 @@ class Canvas {
         gsap.set(Object.entries(this.assets.departing_buses).map(([_, bus]) => bus), {x: this.departingBusesStartOffset()});
     }
 
+    _hideTrains() {
+        gsap.set(this.assets.train_to_retiro, {x: this.trainToRetiroStartOffset()});
+        gsap.set(this.assets.train_to_villa_rosa, {x: this.trainToVillaRosaStartOffset()});
+    }
+
     _setDefaultDayTime() {
-        gsap.set(this.sky(), {opacity: 0});
-        gsap.set(this.lights(), {opacity: 0});
+        gsap.set(this.skyLight(), {opacity: 0});
+        gsap.set(this.streetLights(), {opacity: 0});
+        gsap.set(this.buildingLights(), {fill: '#72a9b7', opacity: 1});
     }
 }
 

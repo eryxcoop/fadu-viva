@@ -22,10 +22,11 @@
             display: flex;
             justify-content: center;
             margin: 0;
+            max-width: 100%;
+            overflow-x: hidden;
         }
 
-        svg#fadu-viva {
-            position: absolute;
+        div#fadu-viva, svg {
             height: 100%;
             display: flex;
         }
@@ -39,7 +40,7 @@
 <![endif]-->
 
 <!-- Add your site or application content here -->
-<svg id="fadu-viva" width="1920" height="1080"></svg>
+<div id="fadu-viva"></div>
 <script src="js/vendor/modernizr-3.8.0.min.js"></script>
 <script src="js/vendor/snap.svg-min.js"></script>
 <script src="js/vendor/gsap.min.js"></script>
