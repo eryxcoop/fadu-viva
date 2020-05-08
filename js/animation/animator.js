@@ -5,10 +5,9 @@ import DaytimeAnimator from "./daytimeAnimator.js";
 
 class Animator {
     constructor(canvas) {
-        this._canvas = canvas;
-        this._daytimeAnimator = new DaytimeAnimator(this._canvas);
-        this._busAnimator = new BusAnimator(this._canvas);
-        this._trafficAnimator = new HighwayTrafficLoopAnimator(this._canvas);
+        this._daytimeAnimator = new DaytimeAnimator(canvas);
+        this._busAnimator = new BusAnimator(canvas);
+        this._trafficAnimator = new HighwayTrafficLoopAnimator(canvas);
     }
 
     animateAccordingTo(statusResponse) {
