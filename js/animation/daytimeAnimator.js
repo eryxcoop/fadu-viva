@@ -10,7 +10,7 @@ class DaytimeAnimator {
     }
 
     _animateDayTime(brightness) {
-        const brightnessOpacity = gsap.utils.mapRange(0, 10, 0.7, 0, brightness);
+        const brightnessOpacity = gsap.utils.mapRange(0, 10, 0.5, 0, brightness);
         const previousOpacity = this._previousOpacity(this._canvas.sky());
         gsap.fromTo(this._canvas.sky(), {opacity: previousOpacity}, {opacity: brightnessOpacity, duration: this._DURATION, ease: "sine.out", stagger: 0.5});
     }
