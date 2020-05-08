@@ -6,6 +6,8 @@ class Canvas {
     };
 
     static ASSETS_NAMES = {
+        SKY: 'Oscuridad',
+        LIGHTS: 'Iluminacion',
         CARS_FIRST_LANE: [
             'Volkswagen_Gol_2015',
             'Up_naranja',
@@ -87,6 +89,8 @@ class Canvas {
             cars_second_lane: undefined,
             arriving_buses: undefined,
             departing_buses: undefined,
+            sky: undefined,
+            lights: undefined,
         };
     }
 
@@ -111,17 +115,24 @@ class Canvas {
     }
 
     fetchAllAssets() {
+        this._fetchSky();
+        this._fetchLights();
         this._fetchCars();
         this._fetchBuses();
     }
 
     initializeScene() {
-        // This should be set later and animated...
-        gsap.set('.Oscuridad', {opacity: 0});
-        gsap.set('.Iluminacion', {opacity: 0});
-
         this._hideCars();
         this._hideBuses();
+        this._setDefaultDayTime();
+    }
+
+    sky() {
+        return this.assets.sky;
+    }
+
+    lights() {
+        return this.assets.lights;
     }
 
     carsStartOffset() {
@@ -130,6 +141,14 @@ class Canvas {
 
     carsEndOffset() {
         return this._locationOffsets().CARS_END_OFFSET;
+    }
+
+    firstLaneCars() {
+        return this.assets.cars_first_lane;
+    }
+
+    secondLaneCars() {
+        return this.assets.cars_second_lane;
     }
 
     getArrivingBus(busName) {
@@ -176,6 +195,22 @@ class Canvas {
         return this.constructor.LOCATION_OFFSETS;
     }
 
+    _fetchSky() {
+        this.assets.sky = this.paper.selectAll(`.${this._assetsNames().SKY}`).items.map(e => e.node);
+    }
+
+    _fetchLights() {
+        // TODO fix svg to math all the lights within the same classname
+        // this.assets.lights = this.paper.select(`${this._assetsNames().LIGHTS}`);
+
+        this.assets.lights = [];
+        this.assets.lights.push(...this.paper.selectAll('.Iluminacion').items.map(e => e.node));
+        this.assets.lights.push(...this.paper.selectAll('.Iluminacion2').items.map(e => e.node));
+        this.assets.lights.push(this.paper.select('#Iluminacion').node);
+        this.assets.lights.push(this.paper.select('#Iluminacion-2').node);
+        this.assets.lights.push(this.paper.select('#Iluminacion-3').node);
+    }
+
     _fetchCars() {
         this.assets.cars_first_lane = this._assetsNames().CARS_FIRST_LANE.map(carId => this.paper.select(`#${carId}`).node);
         this.assets.cars_second_lane = this._assetsNames().CARS_SECOND_LANE.map(carId => this.paper.select(`#${carId}`).node);
@@ -205,6 +240,11 @@ class Canvas {
     _hideBuses() {
         gsap.set(Object.entries(this.assets.arriving_buses).map(([_, bus]) => bus), {x: this.arrivingBusesStartOffset()});
         gsap.set(Object.entries(this.assets.departing_buses).map(([_, bus]) => bus), {x: this.departingBusesStartOffset()});
+    }
+
+    _setDefaultDayTime() {
+        gsap.set(this.sky(), {opacity: 0});
+        gsap.set(this.lights(), {opacity: 0});
     }
 }
 
