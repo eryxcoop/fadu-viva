@@ -18,9 +18,9 @@ class DaytimeAnimator {
     _animateElectricLights(brightness) {
         const previousOpacity = this._previousOpacity(this._canvas.lights());
         if (brightness <= 3) {
-            gsap.fromTo(this._canvas.lights(), {opacity: previousOpacity}, {opacity: 0.5, duration: this._DURATION, ease: "expo.in", stagger: 1});
+            gsap.fromTo(this._canvas.lights(), {opacity: previousOpacity}, {opacity: 0.5, duration: this._DURATION, ease: "expo.in", stagger: 0.3});
         } else {
-            gsap.fromTo(this._canvas.lights(), {opacity: previousOpacity}, {opacity: 0, duration: this._DURATION, ease: "expo.out", stagger: 1});
+            gsap.fromTo(this._canvas.lights(), {opacity: previousOpacity}, {opacity: 0, duration: this._DURATION, ease: "expo.out", stagger: 0.3});
         }
     }
 
