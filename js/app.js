@@ -1,6 +1,7 @@
 import Canvas from "./canvas.js";
+import ApiClient from "./communication/client/apiClient.js";
 import Animator from "./animation/animator.js";
-import {ApiClient, RemoteRequester} from "./communication";
+import RemoteRequester from "./communication/requester/RemoteRequester.js";
 
 const A_MINUTE = 60 * 1000;
 
