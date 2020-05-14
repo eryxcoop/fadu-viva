@@ -10,7 +10,7 @@ class App {
         this._canvas = new Canvas();
         this._animator = undefined;
         this._pollingTimeout = pollingTimeout;
-        this._apiClient = new ApiClient(new RemoteRequester("http://127.0.0.1:5000/"));
+        this._apiClient = new ApiClient(new RemoteRequester(`http://${this._defineAPIHost()}/`));
 
         this.pollForStatusAndAnimate = this.pollForStatusAndAnimate.bind(this);
         this._getStatusAndAnimate = this._getStatusAndAnimate.bind(this);
@@ -35,6 +35,12 @@ class App {
 
     _animateCanvasWith(statusResponse) {
         this._animator.animateAccordingTo(statusResponse);
+    }
+
+    _defineAPIHost() {
+        const apiHost = window.location.host;
+        const apiPort = 5000;
+        return `${apiHost}:${apiPort}` ;
     }
 }
 
