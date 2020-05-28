@@ -1,5 +1,9 @@
 version: "3"
 
+networks:
+  faduviva:
+    external: true
+
 services:
   fadufrontend:
     build: .
@@ -7,3 +11,5 @@ services:
     ports:
       - 80:80
     restart: always
+    networks:
+      - faduviva
