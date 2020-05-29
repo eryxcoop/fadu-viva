@@ -39,8 +39,8 @@ class App {
 
     _defineAPIHost() {
         const apiHost = window.location.host;
-        const apiPort = 80;
-        return `backend.${apiHost}:${apiPort}` ;
+        //const apiPort = 5000;
+        return `${apiHost}` ;
     }
 }
 

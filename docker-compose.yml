@@ -8,8 +8,36 @@ services:
   fadufrontend:
     build: .
     container_name: fadu-frontend
-    ports:
-      - 80:80
     restart: always
     networks:
       - faduviva
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=faduviva"
+      - "traefik.http.routers.frontend.rule=Host(`fadu-viva.eryx.co`)"
+      - "traefik.http.routers.frontend.entrypoints=https"
+      - "traefik.http.routers.frontend.tls=true"
+      - "traefik.http.routers.frontend-insecure.rule=Host(`fadu-viva.eryx.co`)"
+      - "traefik.http.routers.frontend-insecure.entrypoints=http"
+      - "traefik.http.services.frontend.loadbalancer.server.port=80"
+
+  traefik:
+    image: traefik:v2.2.1
+    command:
+      #- "--accesslog=true"
+      - "--log.level=INFO"
+      - "--log=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--providers.docker.network=faduviva"
+      - "--entrypoints.http.address=:80"
+      - "--entrypoints.https.address=:443"
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    networks:
+      - faduviva
+    restart: always
+
