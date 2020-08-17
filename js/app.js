@@ -3,14 +3,16 @@ import ApiClient from "./communication/client/apiClient.js";
 import Animator from "./animation/animator.js";
 import RemoteRequester from "./communication/requester/RemoteRequester.js";
 
-const A_MINUTE = 60 * 1000;
+const A_MINUTE = 60;
+const API_BASE_URL = window.location.host;
 
 class App {
-    constructor(pollingTimeout = A_MINUTE) {
+    constructor(requester=new RemoteRequester(`//${API_BASE_URL}/`),
+                pollingTimeoutSeconds = A_MINUTE) {
         this._canvas = new Canvas();
         this._animator = undefined;
-        this._pollingTimeout = pollingTimeout;
-        this._apiClient = new ApiClient(new RemoteRequester(`//${this._defineAPIHost()}/`));
+        this._pollingTimeoutSeconds = pollingTimeoutSeconds;
+        this._apiClient = new ApiClient(requester);
 
         this.pollForStatusAndAnimate = this.pollForStatusAndAnimate.bind(this);
         this._getStatusAndAnimate = this._getStatusAndAnimate.bind(this);
@@ -26,7 +28,7 @@ class App {
 
     pollForStatusAndAnimate() {
         this._getStatusAndAnimate();
-        setInterval(this._getStatusAndAnimate, this._pollingTimeout);
+        setInterval(this._getStatusAndAnimate, this._pollingTimeoutSeconds * 1000);
     }
 
     _getStatusAndAnimate() {
@@ -35,12 +37,6 @@ class App {
 
     _animateCanvasWith(statusResponse) {
         this._animator.animateAccordingTo(statusResponse);
-    }
-
-    _defineAPIHost() {
-        const apiHost = window.location.host;
-        //const apiPort = 5000;
-        return `${apiHost}` ;
     }
 }
 

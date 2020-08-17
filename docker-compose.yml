@@ -14,10 +14,10 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=faduviva"
-      - "traefik.http.routers.frontend.rule=Host(`fadu-viva.eryx.co`)"
+      - "traefik.http.routers.frontend.rule=Host(`fadu-viva.eryx.co`) || Host(`localhost`)"
       - "traefik.http.routers.frontend.entrypoints=https"
       - "traefik.http.routers.frontend.tls=true"
-      - "traefik.http.routers.frontend-insecure.rule=Host(`fadu-viva.eryx.co`)"
+      - "traefik.http.routers.frontend-insecure.rule=Host(`fadu-viva.eryx.co`) || Host(`localhost`)"
       - "traefik.http.routers.frontend-insecure.entrypoints=http"
       - "traefik.http.services.frontend.loadbalancer.server.port=80"
 

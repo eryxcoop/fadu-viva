@@ -10,10 +10,10 @@ class HTTPResponse {
 
 
 export class ServerErrorResponse extends HTTPResponse {
-    static defaultResponse() {
-        return {
-            status: 500
-        }
+    static defaultResponses() {
+        return [
+            {status: 500}
+        ]
     }
 
     static understandThis(response) {

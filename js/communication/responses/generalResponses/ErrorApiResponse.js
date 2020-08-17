@@ -1,7 +1,7 @@
 import {ApiResponse} from "../response.js"
 
 export class ErrorApiResponse extends ApiResponse {
-    static defaultResponse() {
+    static defaultResponses() {
         throw new Error("You have to implement the method");
     }
 

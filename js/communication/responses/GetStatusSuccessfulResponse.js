@@ -1,24 +1,41 @@
 import {SuccessfulApiResponse} from "./generalResponses/SuccessfulApiResponse.js";
 
 export class GetStatusSuccessfulResponse extends SuccessfulApiResponse {
-    static defaultResponse() {
-        return {
-            "object": {
-                "services": {
-                    "traffic": {
-                        "status": 5.34
-                    },
-                    "buses": {
-                        "arriving": ["42", "37"],
-                        "departing": ["33"]
-                    },
-                    "daylight": {
-                        "brightness": 1.35
+    static defaultResponses() {
+        return [
+            {
+                "object": {
+                    "services": {
+                        "traffic": {"status": 1.4},
+                        "buses": {"arriving": ["34", "37"], "departing": ["33"]},
+                        "daylight": {"brightness": 2}
                     }
-                }
-            },
-            "errors": []
-        }
+                }, "errors": []
+            }, {
+                "object": {
+                    "services": {
+                        "traffic": {"status": 1.4},
+                        "buses": {"arriving": ["28"], "departing": []},
+                        "daylight": {"brightness": 5}
+                    }
+                }, "errors": []
+            }, {
+                "object": {
+                    "services": {
+                        "traffic": {"status": 5.9},
+                        "buses": {"arriving": [], "departing": []},
+                        "daylight": {"brightness": 3}
+                    }
+                }, "errors": []
+            }, {
+                "object": {
+                    "services": {
+                        "traffic": {"status": 7.1},
+                        "buses": {"arriving": ["42"], "departing": ["28", "34", "37"]},
+                        "daylight": {"brightness": 1},
+                    }
+                }, "errors": []
+            }];
     }
 
     daylightBrightness() {
