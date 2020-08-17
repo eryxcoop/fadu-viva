@@ -1,94 +1,94 @@
-class Canvas {
-    static SVG_ID = "fadu-viva";
+const SVG_ID = "fadu-viva";
 
-    static IMAGES_URLS = {
-        BACKGROUND: 'img/fadu-viva.svg'
-    };
+const IMAGES_URLS = {
+    BACKGROUND: 'img/fadu-viva.svg'
+};
 
-    static ASSETS_NAMES = {
-        SKY: 'Cielo',
-        SKY_LIGHT: 'Oscuridad',
-        LIGHTS: 'Iluminacion',
-        CARS_FIRST_LANE: [
-            'Volkswagen_Gol_2015',
-            'Up_naranja',
-            'Peugeot_206_blanco',
-            'Gold_trend_blanco',
-            'Peugeot_206_rojo',
-            'Camion'
-        ],
-        CARS_SECOND_LANE: [
-            'Gold_trend_blanco-2',
-            'Peugeot_206_azul',
-            'Up_amarillo',
-            'Fiorino',
-            'Fiesta_azul',
-            'Ecosport_verde',
-            'Up_amarillo-2'
-        ],
+const ASSETS_NAMES = {
+    SKY: 'Cielo',
+    SKY_LIGHT: 'Oscuridad',
+    LIGHTS: 'Iluminacion',
+    CARS_FIRST_LANE: [
+        'Volkswagen_Gol_2015',
+        'Up_naranja',
+        'Peugeot_206_blanco',
+        'Gold_trend_blanco',
+        'Peugeot_206_rojo',
+        'Camion'
+    ],
+    CARS_SECOND_LANE: [
+        'Gold_trend_blanco-2',
+        'Peugeot_206_azul',
+        'Up_amarillo',
+        'Fiorino',
+        'Fiesta_azul',
+        'Ecosport_verde',
+        'Up_amarillo-2'
+    ],
+    ARRIVING_BUSES: {
+        166: '_166_llegada',
+        160: '_160_llegada',
+        107: '_107_llegada',
+        45: '_45_llegada',
+        42: '_42_llegada',
+        37: '_37_llegada',
+        34: '_34_llegada',
+        33: '_33_llegada',
+        28: '_28_llegada',
+    },
+    DEPARTING_BUSES: {
+        166: '_166_salida',
+        160: '_160_salida',
+        107: '_107_salida',
+        45: '_45_salida',
+        42: '_42_salida',
+        37: '_37_salida',
+        34: '_34_salida',
+        33: '_33_salida',
+        28: '_28_salida',
+    },
+    TRAIN_TO_RETIRO: 'TrenARetiro',
+    TRAIN_TO_VILLA_ROSA: 'TrenAVillaRosa',
+};
+
+const LOCATION_OFFSETS = {
+    BUS_STOP_OFFSETS: {
         ARRIVING_BUSES: {
-            166: '_166_llegada',
-            160: '_160_llegada',
-            107: '_107_llegada',
-            45: '_45_llegada',
-            42: '_42_llegada',
-            37: '_37_llegada',
-            34: '_34_llegada',
-            33: '_33_llegada',
-            28: '_28_llegada',
+            166: -1500,
+            160: -1900,
+            107: -1100,
+            45: -700,
+            42: -1480,
+            37: -1880,
+            34: -1080,
+            33: -680,
+            28: -2400,
         },
         DEPARTING_BUSES: {
-            166: '_166_salida',
-            160: '_160_salida',
-            107: '_107_salida',
-            45: '_45_salida',
-            42: '_42_salida',
-            37: '_37_salida',
-            34: '_34_salida',
-            33: '_33_salida',
-            28: '_28_salida',
+            166: 1300,
+            160: 1700,
+            107: 900,
+            45: 500,
+            42: 1280,
+            37: 1680,
+            34: 880,
+            33: 480,
+            28: 2200,
         },
-        TRAIN_TO_RETIRO: 'TrenARetiro',
-        TRAIN_TO_VILLA_ROSA: 'TrenAVillaRosa',
-    };
+    },
+    ARRIVING_BUSES_START_OFFSET: 400,
+    DEPARTING_BUSES_START_OFFSET: -400,
+    ARRIVING_BUSES_END_OFFSET: -3400,
+    DEPARTING_BUSES_END_OFFSET: 3400,
+    CARS_START_OFFSET: -500,
+    CARS_END_OFFSET: 3400,
+    TRAIN_TO_RETIRO_START_OFFSET: -3200,
+    TRAIN_TO_VILLA_ROSA_START_OFFSET: 3200,
+    TRAIN_TO_RETIRO_END_OFFSET: 3400,
+    TRAIN_TO_VILLA_ROSA_END_OFFSET: -3400,
+};
 
-    static LOCATION_OFFSETS = {
-        BUS_STOP_OFFSETS: {
-            ARRIVING_BUSES: {
-                166: -1500,
-                160: -1900,
-                107: -1100,
-                45: -700,
-                42: -1480,
-                37: -1880,
-                34: -1080,
-                33: -680,
-                28: -2400,
-            },
-            DEPARTING_BUSES: {
-                166: 1300,
-                160: 1700,
-                107: 900,
-                45: 500,
-                42: 1280,
-                37: 1680,
-                34: 880,
-                33: 480,
-                28: 2200,
-            },
-        },
-        ARRIVING_BUSES_START_OFFSET: 400,
-        DEPARTING_BUSES_START_OFFSET: -400,
-        ARRIVING_BUSES_END_OFFSET: -3400,
-        DEPARTING_BUSES_END_OFFSET: 3400,
-        CARS_START_OFFSET: -500,
-        CARS_END_OFFSET: 3400,
-        TRAIN_TO_RETIRO_START_OFFSET: -3200,
-        TRAIN_TO_VILLA_ROSA_START_OFFSET: 3200,
-        TRAIN_TO_RETIRO_END_OFFSET: 3400,
-        TRAIN_TO_VILLA_ROSA_END_OFFSET: -3400,
-    };
-
+class Canvas {
     constructor() {
         this.paper = undefined;
         this.assets = {
@@ -115,7 +115,7 @@ class Canvas {
     }
 
     initializePaper() {
-        this.paper = Snap(`#${this.constructor.SVG_ID}`);
+        this.paper = Snap(`#${SVG_ID}`);
     }
 
     loadBackground(onBackgroundLoad) {
@@ -222,15 +222,15 @@ class Canvas {
     }
 
     _imagesURLs() {
-        return this.constructor.IMAGES_URLS;
+        return IMAGES_URLS;
     }
 
     _assetsNames() {
-        return this.constructor.ASSETS_NAMES;
+        return ASSETS_NAMES;
     }
 
     _locationOffsets() {
-        return this.constructor.LOCATION_OFFSETS;
+        return LOCATION_OFFSETS;
     }
 
     _fetchSky() {
