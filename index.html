@@ -12,27 +12,12 @@
 
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/main.css">
+    <link href="css/general.css" rel="stylesheet">
+    <link href="css/modal.css" rel="stylesheet">
 
     <meta name="theme-color" content="#fafafa">
-    <style>
-        html, body {
-            height: 100%;
-            align-items: center;
-            position: relative;
-            display: flex;
-            justify-content: center;
-            margin: 0;
-            max-width: 100%;
-            overflow-x: hidden;
-        }
-
-        div#fadu-viva, svg {
-            height: 100%;
-            display: flex;
-        }
-    </style>
-</head>
-
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400;500&display=swap" rel="stylesheet">
 <body>
 <!--[if IE]>
 <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade
@@ -40,6 +25,126 @@
 <![endif]-->
 
 <!-- Add your site or application content here -->
+<div class="info-area">
+    <div class="button-container">
+        <a class="button">
+            <img src="img/info-solid.svg">
+        </a>
+    </div>
+    <div class="apis-container">
+        <ul>
+            <li>
+                <img src="img/logoBA.svg">
+                <div class="apis-description">
+                    <p class="title">
+                        Api transporte
+                    </p>
+                    <p class="base-text">
+                        Localización de colectivos
+                        en tiempo real.
+                    </p>
+                </div>
+            </li>
+            <li>
+                <img src="img/logoHERE01.svg">
+                <div class="apis-description">
+                    <p class="title">
+                        Here
+                    </p>
+                    <p class="base-text">
+                        Estado del tráfico
+                        en tiempo real.
+                    </p>
+                </div>
+            </li>
+            <li>
+                <img src="img/logoBA.svg">
+                <div class="apis-description">
+                    <p class="title">
+                        Api transporte
+                    </p>
+                    <p class="base-text">
+                        Localización de colectivos
+                        en tiempo real.
+                    </p>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="logo-link">
+        <p class="base-text"> desarrollado por</p>
+        <a href="https://eryx.co">
+            <img src="img/logo.svg">
+        </a>
+    </div>
+
+    <div class="modal-info-container">
+        <div class="modal-info">
+            <a class="close-button"><p class="close-button-content">+</p></a>
+            <div class="border-container">
+                <p class="title">
+                    Fadu Viva es una ventana a lo que sucede en</br>
+                    Ciudad Universitaria en tiempo real
+                </p>
+                <div class="content">
+                    <p class="base-text">
+                        Se trata de una “postal animada” que rinde homenaje a la FADU creada por diseñadores y programadores
+                        en
+                        conjunto.
+                    </p>
+                    <div class="border-content">
+                        <div class="list-container">
+                            <p class="base-text">
+                                Este proyecto surge en nuestro espacio de experimentación llamado EryxLabs y su valor radica
+                                en
+                                la interacción entre elementos que brindan datos en tiempo real (APIs) con ilustraciones.
+                            </p>
+                            <p class="base-text">
+                                Las animaciones aportan información sobre:
+                            </p>
+                            <ul>
+                                <li>
+                                    <p class="base-text">
+                                        El estado del tránsito
+                                    </p>
+                                </li>
+                                <li>
+                                    <p class="base-text">
+                                        El clima
+                                    </p>
+                                </li>
+                                <li>
+                                    <p class="base-text">
+                                        La frecuencia de los colectivos
+                                    </p>
+                                </li>
+                                <li>
+                                    <p class="base-text">
+                                        Y proximamente: frecuencia de trenes, de vuelos y estaciones del año.
+                                    </p>
+                                </li>
+                            </ul>
+                            <p class="base-text">
+                                Gracias a esto, cada vez que ingreses va a estar sucediendo algo distinto.
+                            </p>
+                        </div>
+                        <div class="img-container">
+                            <img src="img/banquito-fadu.svg">
+                        </div>
+                    </div>
+                </div>
+                <div class="logo">
+                    <img src="img/logo.svg">
+                </div>
+            </div>
+            <a class="close-btn"></a>
+        </div>
+        <div class="overlay"></div>
+    </div>
+
+</div>
+
+
 <div id="fadu-viva"></div>
 <script src="js/vendor/modernizr-3.8.0.min.js"></script>
 <script src="js/vendor/snap.svg-min.js"></script>
@@ -62,6 +167,49 @@
     ga('send', 'pageview')
 </script>
 <script src="https://www.google-analytics.com/analytics.js" async></script>
+
+
+<script>
+
+    /*------------ funciones para mostrar y ocultar el modal -----------------*/
+    function vermodal() {
+        $(".modal-info, .overlay").addClass("show");
+    };
+    $(".button").click(vermodal);
+
+    function ocultarboton() {
+        $(".button").addClass("dark");
+    };
+    $(".button").click(ocultarboton);
+
+
+    function ocultarmodal() {
+        $(".modal-info, .overlay").removeClass("show");
+    };
+    $(".close-button, .overlay").click(ocultarmodal);
+
+
+    function removermodal() {
+        $(".modal-info, .overlay").addClass("desappear");
+    };
+    $(".close-button, .overlay").click(removermodal);
+
+    function resetearmodal() {
+        $(".modal-info, .overlay").removeClass("desappear");
+    };
+    $(".button").click(resetearmodal);
+
+    function verboton() {
+        $(".button").removeClass("dark");
+    };
+    $(".close-button, .overlay").click(verboton);
+
+
+    /*------------ funciones para el modal en posicion vertical -----------------*/
+
+
+</script>
+
 </body>
 
 </html>

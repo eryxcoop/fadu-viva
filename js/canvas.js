@@ -109,7 +109,7 @@ class Canvas {
         this.initializePaper();
         this.loadBackground(function () {
             this.fetchAllAssets();
-            this.initializeScene();
+            // this.initializeScene();
             callback(this);
         }.bind(this));
     }
