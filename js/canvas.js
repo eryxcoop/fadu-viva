@@ -37,15 +37,15 @@ const ASSETS_NAMES = {
         28: '_28_llegada',
     },
     DEPARTING_BUSES: {
-        166: '_166_salida',
-        160: '_160_salida',
-        107: '_107_salida',
-        45: '_45_salida',
-        42: '_42_salida',
-        37: '_37_salida',
-        34: '_34_salida',
-        33: '_33_salida',
-        28: '_28_salida',
+        166: '_166_llegada-2',
+        160: '_160_llegada-2',
+        107: '_107_llegada-2',
+        45: '_45_llegada-2',
+        42: '_42_llegada-2',
+        37: '_37_llegada-2',
+        34: '_34_llegada-2',
+        33: '_33_llegada-2',
+        28: '_28_llegada-2',
     },
     TRAIN_TO_RETIRO: 'TrenARetiro',
     TRAIN_TO_VILLA_ROSA: 'TrenAVillaRosa',
@@ -109,7 +109,7 @@ class Canvas {
         this.initializePaper();
         this.loadBackground(function () {
             this.fetchAllAssets();
-            // this.initializeScene();
+            this.initializeScene();
             callback(this);
         }.bind(this));
     }
@@ -131,13 +131,13 @@ class Canvas {
         this._fetchBuildingLights();
         this._fetchCars();
         this._fetchBuses();
-        this._fetchTrains();
+        // this._fetchTrains();
     }
 
     initializeScene() {
         this._hideCars();
         this._hideBuses();
-        this._hideTrains();
+        // this._hideTrains();
         this._setDefaultDayTime();
     }
 
