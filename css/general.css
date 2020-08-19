@@ -1,0 +1,142 @@
+/* estilos generales */
+
+html, body {
+    height: 100%;
+    align-items: center;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+div#fadu-viva, svg {
+    height: 100%;
+    display: flex;
+}
+
+.base-text {
+    font-family: 'Maven Pro', sans-serif;
+    font-weight: 400;
+    color: #5a5a5a;
+    margin: 0;
+}
+
+/* buttons --------------------------  */
+
+.info-area {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+.info-area .button-container {
+    top: 10px;
+    right: 10px;
+    position: absolute;
+    margin: 5px 10px 0;
+    z-index: 10;
+}
+
+.button {
+    height: 35px;
+    width: 35px;
+    border-radius: 40px;
+    background-color: #d49816;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    padding: 10px;
+    box-sizing: border-box;
+    box-shadow: 6px 6px 15px -10px rgba(0, 0, 0, 0.75);
+}
+
+.button img {
+    height: 100%;
+}
+
+/*  Indicador de apis  ------------------  */
+
+.apis-container {
+    position: absolute;
+    opacity: .7;
+    height: 60px;
+    bottom: 10px;
+    right: 15px;
+    overflow: hidden;
+}
+
+.apis-container ul {
+    margin: 0;
+    padding: 0;
+    animation: slider 10s;
+    animation-fill-mode: forwards;
+    animation-delay: 2s;
+    animation-iteration-count: infinite;
+}
+
+.apis-container ul li {
+    display: flex;
+    align-items: center;
+    height: 60px;
+}
+
+.apis-container ul li img{
+    height: 55px;
+    margin-right: 10px;
+}
+
+.apis-container ul li .apis-description {
+    display: flex;
+    flex-direction: column;
+    max-width: 200px;
+}
+
+.apis-container ul li .apis-description .title {
+    font-family: 'Maven Pro', sans-serif;
+    color: #d49816;
+    font-size: 1em;
+    font-weight: 500;
+    margin: 0;
+}
+
+.apis-container ul li .apis-description .base-text {
+    color: #ffffff;
+    margin: 0;
+    font-size: .8em;
+    font-weight: inherit;
+}
+
+
+
+@keyframes slider {
+    0% {transform: translateY(0px);}
+    25% {transform: translateY(-60px);}
+    50% {transform: translateY(-60px);}
+    75% {transform: translateY(-120px);}
+    100% {transform: translateY(-120px);}
+}
+
+
+.logo-link{
+    width: 100%;
+    display: flex;
+    position: absolute;
+    bottom: 5px;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-link p{
+    color: #ffffff;
+    font-weight: 400;
+    margin-right: 5px;
+    opacity: .8;
+}
+
+.logo-link a{
+    cursor: pointer;
+    width: 100px;
+}
