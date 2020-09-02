@@ -28,7 +28,7 @@ class DaytimeAnimator {
     _animateNightLights() {
         // fixme this parameters value should be canvas responsibility
         gsap.to(this._canvas.streetLights(), {opacity: 0.5, duration: this._DURATION, ease: "none"});
-        gsap.to(this._canvas.buildingLights(), {opacity: 0.5, fill: 'yellow', duration: this._DURATION, ease: 'none'});
+        gsap.to(this._canvas.buildingLights(), {fill: '#f3f3bb', duration: this._DURATION, ease: 'none'});
     }
 
     _animateDayLights() {

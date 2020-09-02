@@ -3,14 +3,18 @@ p{
     margin: .5em;
 }
 
+/*     -------- modal info -------   */
+
 .modal-info-container {
     display: flex;
     justify-content: center;
     width: 100%;
-    height: 100%;
     position: fixed;
     left: 0;
     top: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 100%;
 }
 
 .modal-info-container p{
@@ -24,34 +28,39 @@ p{
     color: #4ca2fa;
     margin: -40px auto 0;
     background-color: #ffffff;
-    width: fit-content;
     padding: 20px;
     font-size: 1.2em;
     font-weight: 500;
+    max-width: 410px;
 }
 
 .modal-info {
     background-color: #ffffff;
+    width: 100%;
     max-width: 750px;
     min-width: 500px;
     border-radius: 14px;
     padding: 10px 30px 30px;
     box-sizing: border-box;
-    height: fit-content;
     position: relative;
     display: none;
-    margin-top: 50px;
+    margin: 50px 10px 20px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    flex-direction: column;
+    align-items: center;
+    max-height: 525px;
 }
 
 .border-container{
     border: 2px solid #4ca2fa;
     border-radius: 14px;
     display: flex;
-    justify-content: center;
     flex-direction: column;
     margin-top: 30px;
-    padding: 0 40px 20px;
+    padding: 0 40px 40px;
     align-items: center;
+    z-index: -1;
 }
 
 
@@ -60,10 +69,6 @@ p{
 }
 .list-container{
     width: 75%;
-}
-
-ul{
-
 }
 
 li{
@@ -94,8 +99,8 @@ li .base-text{
 
 
 .logo {
-    position: absolute;
-    bottom: 17px;
+    margin-bottom: -17px;
+    transform: translateY(-17px);
     background: #ffffff;
     padding: 0 10px;
 }
@@ -129,18 +134,78 @@ p.close-button-content{
 .overlay{
     background-color: rgba(0, 0, 0, .5);
     width: 100%;
-    height: 100%;
+    height: 100vh;
     z-index: -1;
     position: absolute;
     display: none;
 }
 
+::-webkit-scrollbar {
+    width: 15px;
+
+}
+
+::-webkit-scrollbar-track {
+    background-color: white;
+    border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: darkgrey;
+    border-radius: 10px;
+    width: 3px;
+    border: 5px solid white;
+}
+
+
+/*     -------- modal mobile -------   */
+
+
+.modal-mobile-container{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+.modal-mobile{
+    background-color: #ffffff;
+    width: 180px;
+    border-radius: 14px;
+    padding: 30px 25px 30px;
+    box-sizing: border-box;
+    position: absolute;
+    flex-direction: column;
+    align-items: center;
+    height: 220px;
+    display: flex;
+}
+
+.modal-mobile p{
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.modal-mobile img{
+    height: 70px;
+    animation: girar 3s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes girar {
+    0% {opacity: 1;}
+    75% {transform: rotate(90deg); opacity: 1;}
+    99% {transform: rotate(90deg); opacity: 0;}
+    100% {opacity: 0;}
+}
 
 /*  ocultar y mostrar con script ----------- */
 
 
 .show{
-    display: block;
+    display: flex;
     animation: appear 2s;
     animation-fill-mode: forwards;
 }
@@ -152,7 +217,7 @@ p.close-button-content{
 }
 
 .desappear{
-    display: block;
+    display: flex;
     animation: desappear 2s;
     animation-fill-mode: forwards;
 }

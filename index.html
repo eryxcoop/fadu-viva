@@ -4,16 +4,18 @@
 <head>
     <meta charset="utf-8">
     <title>FADU Viva</title>
-    <meta name="description" content="">
+    <meta name="description"
+          content="Fadu Viva es una ventana a lo que sucede en Ciudad Universitaria en tiempo real. Este proyecto surge dentro del espacio de experimentación de EryxLabs y su valor radica en la interacción entre elementos que brindan datos en tiempo real (APIs) con ilustraciones.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="apple-touch-icon" href="icon.png">
+    <link rel="shortcut icon" type="image/png" href="img/favicon.ico">
     <!-- Place favicon.ico in the root directory -->
 
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/main.css">
     <link href="css/general.css" rel="stylesheet">
     <link href="css/modal.css" rel="stylesheet">
+    <link href="css/mediaqueries.css" rel="stylesheet">
 
     <meta name="theme-color" content="#fafafa">
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600&display=swap" rel="stylesheet">
@@ -23,6 +25,18 @@
 <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade
     your browser</a> to improve your experience and security.</p>
 <![endif]-->
+
+<div style="display: none;">
+    <h1>FADU viva</h1>
+    <h2>eryx labs</h2>
+</div>
+
+<div class="spinner-container">
+    <div class="spinner">
+        <img class="spinner-base" src="img/spinner-base.svg">
+        <img class="corazon" src="img/corazon.svg">
+    </div>
+</div>
 
 <!-- Add your site or application content here -->
 <div class="info-area">
@@ -78,26 +92,38 @@
         </a>
     </div>
 
+    <div class="modal-mobile-container">
+    <div class="modal-mobile">
+        <p class="base-text">
+            Girá tu dispositivo para disfrutar de FADU viva.
+        </p>
+        <img class="cellphone" src="img/cellphone.svg">
+    </div>
+    </div>
+
     <div class="modal-info-container">
         <div class="modal-info">
             <a class="close-button"><p class="close-button-content">+</p></a>
             <div class="border-container">
                 <p class="title">
-                    Fadu Viva es una ventana a lo que sucede en</br>
+                    Fadu Viva es una ventana a lo que sucede en
                     Ciudad Universitaria en tiempo real
                 </p>
                 <div class="content">
                     <p class="base-text">
-                        Se trata de una “postal animada” que rinde homenaje a la FADU creada por diseñadores y programadores
+                        Se trata de una “postal animada” que rinde homenaje a la FADU creada por diseñadores y
+                        programadores
                         en
                         conjunto.
                     </p>
                     <div class="border-content">
                         <div class="list-container">
                             <p class="base-text">
-                                Este proyecto surge en nuestro espacio de experimentación llamado EryxLabs y su valor radica
+                                Este proyecto surge en nuestro espacio de experimentación llamado EryxLabs y su valor
+                                radica
                                 en
-                                la interacción entre elementos que brindan datos en tiempo real (APIs) con ilustraciones.
+                                la interacción entre elementos que brindan datos en tiempo real (APIs) con
+                                ilustraciones.
                             </p>
                             <p class="base-text">
                                 Las animaciones aportan información sobre:
@@ -133,9 +159,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="logo">
-                    <img src="img/logo.svg">
-                </div>
+
+            </div>
+            <div class="logo">
+                <img src="img/logo.svg">
             </div>
             <a class="close-btn"></a>
         </div>

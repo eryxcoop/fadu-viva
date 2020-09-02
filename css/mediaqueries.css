@@ -1,0 +1,70 @@
+/* Modal mobile  */
+
+@media only screen and (max-width: 768px) {
+    .list-container {
+        width: auto;
+    }
+    .img-container {
+        display: none;
+    }
+
+    .border-container p{
+        font-size: 14px;
+    }
+
+    .modal-info {
+        padding: 10px 20px 20px;
+        margin: 50px 10px 30px;
+        height: auto;
+        /* si no estamos en un celular usar height: fit-content; */
+    }
+
+    .list-container ul{
+        width: 60%;
+    }
+    .modal-info-container .title {
+        font-size: 1.1em;
+    }
+
+    .close-button{
+        position: fixed;
+        top: 65px;
+        right: 30px;
+    }
+
+
+    /* Indicador de apis */
+
+
+    .apis-container {
+        height: 50px;
+        bottom: 5px;
+    }
+
+    .apis-container ul li img {
+        height: 35px;
+    }
+
+    .apis-container ul li p.title{
+        display: none;
+    }
+
+    .apis-container ul li .apis-description {
+        max-width: 150px;
+    }
+
+    .logo-link {
+        justify-content: flex-start;
+        margin-left: 20px;
+    }
+
+
+}
+
+/*@media (min-height: 320px) {*/
+    /*.modal-info {*/
+        /*max-height: 310px;*/
+        /*overflow-x: hidden;*/
+        /*overflow-y: auto;*/
+    /*}*/
+/*}*/
