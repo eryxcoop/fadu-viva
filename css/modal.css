@@ -180,7 +180,7 @@ p.close-button-content{
     flex-direction: column;
     align-items: center;
     height: 220px;
-    display: flex;
+    display: none;
     z-index: 2;
 }
 
@@ -206,7 +206,7 @@ p.close-button-content{
     background-color: rgba(0, 0, 0, .3);
     width: 100%;
     height: 100vh;
-    z-index: 1;
+    z-index: 0;
     position: absolute;
 }
 
@@ -215,7 +215,7 @@ p.close-button-content{
 
 .show{
     display: flex;
-    animation: appear 2s;
+    animation: appear 1s;
     animation-fill-mode: forwards;
 }
 
@@ -227,7 +227,7 @@ p.close-button-content{
 
 .desappear{
     display: flex;
-    animation: desappear 2s;
+    animation: desappear 1s;
     animation-fill-mode: forwards;
 }
 

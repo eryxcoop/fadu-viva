@@ -31,17 +31,17 @@
     <h2>eryx labs</h2>
 </div>
 
+<!-- Add your site or application content here -->
 <div class="spinner-container">
     <div class="spinner">
-        <img class="spinner-base" src="img/spinner-base.svg">
-        <img class="corazon" src="img/corazon.svg">
+        <img class="spinner-base" src="img/spinner-base.svg" alt="spinner">
+        <img class="corazon" src="img/corazon.svg" alt="spinner">
     </div>
 </div>
 
-<!-- Add your site or application content here -->
 <div class="info-area">
     <div class="button-container">
-        <a class="button">
+        <a class="button info-button">
             <img src="img/info-solid.svg">
         </a>
     </div>
@@ -200,41 +200,64 @@
 <script>
 
     /*------------ funciones para mostrar y ocultar el modal -----------------*/
-    function vermodal() {
-        $(".modal-info, .overlay").addClass("show");
-    };
-    $(".button").click(vermodal);
-
-    function ocultarboton() {
-        $(".button").addClass("dark");
-    };
-    $(".button").click(ocultarboton);
-
-
-    function ocultarmodal() {
-        $(".modal-info, .overlay").removeClass("show");
-    };
-    $(".close-button, .overlay").click(ocultarmodal);
-
-
-    function removermodal() {
-        $(".modal-info, .overlay").addClass("desappear");
-    };
-    $(".close-button, .overlay").click(removermodal);
-
-    function resetearmodal() {
+    function showInfoModal() {
         $(".modal-info, .overlay").removeClass("desappear");
-    };
-    $(".button").click(resetearmodal);
+        $(".modal-info, .overlay").addClass("show");
+        $(".info-button").addClass("dark");
+    }
 
-    function verboton() {
-        $(".button").removeClass("dark");
-    };
-    $(".close-button, .overlay").click(verboton);
+    function hideInfoModal() {
+        $(".modal-info, .overlay").removeClass("show");
+        $(".modal-info, .overlay").addClass("desappear");
+        $(".info-button").removeClass("dark");
+    }
 
+    function showRotateMobileMessage() {
+        $(".logo-link").hide();
+        $(".apis-container").hide();
+        $(".button-container").hide();
+        $(".modal-mobile, .overlay-mobile").removeClass("desappear");
+        $(".modal-mobile, .overlay-mobile").addClass("show");
+    }
+
+    function hideRotateMobileMessage() {
+        $(".logo-link").fadeIn(1000);
+        $(".apis-container").fadeIn(1000);
+        $(".button-container").fadeIn(1000);
+        $(".modal-mobile, .overlay-mobile").removeClass("show");
+        $(".modal-mobile, .overlay-mobile").addClass("desappear");
+    }
+
+    $(".info-button").click(showInfoModal);
+    $(".close-button, .overlay").click(hideInfoModal);
 
     /*------------ funciones para el modal en posicion vertical -----------------*/
 
+    const browserIsMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    if(browserIsMobile) {
+        function rotateMessageWhenMobileIsInPortrait() {
+            if (window.orientation & 2) {
+                // Do something if in landscape mode
+                hideRotateMobileMessage();
+            } else {
+                // Do something if in portrait mode
+                showRotateMobileMessage();
+            }
+        }
+
+        window.addEventListener('orientationchange', function() {
+            rotateMessageWhenMobileIsInPortrait();
+        }, false);
+
+        rotateMessageWhenMobileIsInPortrait();
+
+        $(".modal-info").attr("height", "fit-content");
+        $(".modal-info").attr("height", "auto !important");
+    }
+
+    $( document ).ready(function() {
+        $(".spinner-container").hide();
+    });
 
 </script>
 
