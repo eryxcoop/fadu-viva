@@ -15,8 +15,7 @@
     .modal-info {
         padding: 10px 20px 20px;
         margin: 50px 10px 30px;
-        height: auto;
-        /* si no estamos en un celular usar height: fit-content; */
+        height: fit-content;
     }
 
     .list-container ul{
