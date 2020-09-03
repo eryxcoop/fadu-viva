@@ -1,5 +1,7 @@
 const SVG_ID = "fadu-viva";
 
+const LOADER_CONTAINER = 'spinner-container';
+
 const IMAGES_URLS = {
     BACKGROUND: 'img/fadu-viva.svg'
 };
@@ -108,6 +110,7 @@ class Canvas {
     initialize(callback) {
         this.initializePaper();
         this.loadBackground(function () {
+            this.removeLoader();
             this.fetchAllAssets();
             this.initializeScene();
             callback(this);
@@ -118,8 +121,13 @@ class Canvas {
         this.paper = Snap(`#${SVG_ID}`);
     }
 
+    removeLoader() {
+        $(`.${LOADER_CONTAINER}`).fadeOut(1000);
+    }
+
     loadBackground(onBackgroundLoad) {
         this.assets.background = Snap.load(this._imagesURLs().BACKGROUND, function (fragment) {
+            this.paper.children().map(e => e.remove());
             this.paper.add(fragment);
             onBackgroundLoad();
         }.bind(this));

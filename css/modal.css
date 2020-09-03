@@ -208,6 +208,7 @@ p.close-button-content{
     height: 100vh;
     z-index: 0;
     position: absolute;
+    display: none;
 }
 
 /*  ocultar y mostrar con script ----------- */
