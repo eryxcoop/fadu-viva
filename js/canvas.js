@@ -51,6 +51,17 @@ const ASSETS_NAMES = {
     },
     TRAIN_TO_RETIRO: 'TrenARetiro',
     TRAIN_TO_VILLA_ROSA: 'TrenAVillaRosa',
+    DAY_TREES: [
+        // 'ArbolesFadu',
+        'ArbolesInfinito',
+        'ArbolesMetrobus',
+        'ArbolesPlazoletaOscuridad',  // aca quedo mal el nombre en el svg
+    ],
+    NIGHT_TREES: [
+        'ArbolesInfinitoOscuridad',
+        'ArbolesMetrobusOscuridad',
+        'ArbolesPlazoleta',  // aca quedo mal el nombre en el svg
+    ]
 };
 
 const LOCATION_OFFSETS = {
@@ -104,6 +115,8 @@ class Canvas {
             sky_light: undefined,
             street_lights: undefined,
             building_lights: undefined,
+            day_trees: undefined,
+            night_trees: undefined,
         };
     }
 
@@ -139,6 +152,7 @@ class Canvas {
         this._fetchBuildingLights();
         this._fetchCars();
         this._fetchBuses();
+        this._fetchTrees();
         // this._fetchTrains();
     }
 
@@ -163,6 +177,14 @@ class Canvas {
 
     buildingLights() {
         return this.assets.building_lights;
+    }
+
+    dayTrees() {
+        return this.assets.day_trees;
+    }
+
+    nightTrees() {
+        return this.assets.night_trees;
     }
 
     carsStartOffset() {
@@ -287,6 +309,11 @@ class Canvas {
         this.assets.train_to_villa_rosa = this.paper.select(`#${this._assetsNames().TRAIN_TO_VILLA_ROSA}`).node;
     }
 
+    _fetchTrees() {
+        this.assets.day_trees = this._assetsNames().DAY_TREES.map(treeId => this.paper.select(`#${treeId}`).node);
+        this.assets.night_trees = this._assetsNames().NIGHT_TREES.map(treeId => this.paper.select(`#${treeId}`).node);
+    }
+
     _hideCars() {
         gsap.set(this.assets.cars_first_lane, {x: this.carsStartOffset()});
         gsap.set(this.assets.cars_second_lane, {x: this.carsStartOffset()});
@@ -303,6 +330,9 @@ class Canvas {
     }
 
     _setDefaultDayTime() {
+        // TODO: use animator here: animator.setDefaultScene()
+        gsap.set(this.dayTrees(), {opacity: 1});
+        gsap.set(this.nightTrees(), {opacity: 0});
         gsap.set(this.skyLight(), {opacity: 0});
         gsap.set(this.streetLights(), {opacity: 0});
         gsap.set(this.buildingLights(), {fill: '#72a9b7', opacity: 1});

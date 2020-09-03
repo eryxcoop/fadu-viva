@@ -6,7 +6,7 @@ class DaytimeAnimator {
 
     animateAccordingTo(brightness) {
         this._animateSkyLight(brightness);
-        this._animateStreetAndBuildingLights(brightness);
+        this._animateStreetLightsBuildingLightsAndTrees(brightness);
     }
 
     _animateSkyLight(brightness) {
@@ -16,25 +16,27 @@ class DaytimeAnimator {
         gsap.to(this._canvas.sky(), {fill: gsap.utils.interpolate("#aedef5", "#4682b4", skyBrightness), duration: this._DURATION, ease: 'none'});
     }
 
-    _animateStreetAndBuildingLights(brightness) {
+    _animateStreetLightsBuildingLightsAndTrees(brightness) {
         const isNightTime = brightness <= 3;
         if (isNightTime) {
-            this._animateNightLights();
+            this._animateAsNightTime();
         } else {
-            this._animateDayLights();
+            this._animateAsDayTime();
         }
     }
 
-    _animateNightLights() {
+    _animateAsNightTime() {
         // fixme this parameters value should be canvas responsibility
         gsap.to(this._canvas.streetLights(), {opacity: 0.5, duration: this._DURATION, ease: "none"});
         gsap.to(this._canvas.buildingLights(), {fill: '#f3f3bb', duration: this._DURATION, ease: 'none'});
+        gsap.to(this._canvas.nightTrees(), {opacity: 1, duration: this._DURATION, ease: "none"});
     }
 
-    _animateDayLights() {
+    _animateAsDayTime() {
         // fixme this parameters should be canvas responsibility
         gsap.to(this._canvas.streetLights(), {opacity: 0, duration: this._DURATION, ease: "none"});
         gsap.to(this._canvas.buildingLights(), {opacity: 1, fill: '#72a9b7', duration: this._DURATION, ease: 'none'});
+        gsap.to(this._canvas.nightTrees(), {opacity: 0, duration: this._DURATION, ease: "none"});
     }
 }
 
