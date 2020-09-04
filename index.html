@@ -1,4 +1,4 @@
-<!doctype html>
+<!d<!doctype html>
 <html class="no-js" lang="">
 
 <head>
@@ -16,6 +16,7 @@
     <link href="css/general.css" rel="stylesheet">
     <link href="css/modal.css" rel="stylesheet">
     <link href="css/mediaqueries.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
     <meta name="theme-color" content="#fafafa">
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600&display=swap" rel="stylesheet">
@@ -39,12 +40,84 @@
     </div>
 </div>
 
+
+<div id="modal1" class="modal modal-info-container">
+    <div class="modal-content">
+        <p class="title">
+            Fadu Viva es una ventana a lo que sucede en
+            Ciudad Universitaria en tiempo real
+        </p>
+        <div class="content">
+            <p class="base-text">
+                Se trata de una “postal animada” que rinde homenaje a la FADU creada por diseñadores y
+                programadores
+                en
+                conjunto.
+            </p>
+            <div class="info-container">
+                <div class="list-container">
+                    <p class="base-text">
+                        Este proyecto surge en nuestro espacio de experimentación llamado EryxLabs y su valor
+                        radica
+                        en
+                        la interacción entre elementos que brindan datos en tiempo real (APIs) con
+                        ilustraciones.
+                    </p>
+                    <p class="base-text">
+                        Las animaciones aportan información sobre:
+                    </p>
+                    <ul>
+                        <li>
+                            <p class="base-text">
+                                El estado del tránsito
+                            </p>
+                        </li>
+                        <li>
+                            <p class="base-text">
+                                El clima
+                            </p>
+                        </li>
+                        <li>
+                            <p class="base-text">
+                                La frecuencia de los colectivos
+                            </p>
+                        </li>
+                        <li>
+                            <p class="base-text">
+                                Y proximamente: frecuencia de trenes, de vuelos y estaciones del año.
+                            </p>
+                        </li>
+                    </ul>
+                    <p class="base-text">
+                        Gracias a esto, cada vez que ingreses va a estar sucediendo algo distinto.
+                    </p>
+                </div>
+                <div class="img-container">
+                    <img src="img/banquito-fadu.svg">
+                </div>
+            </div>
+        </div>
+        <div class="logo">
+            <img src="img/logo.svg">
+        </div>
+        <div class="border-container">
+        </div>
+
+    </div>
+    <a class="close-button modal-close">
+        <p class="close-button-content">+</p>
+    </a>
+</div>
+
+
 <div class="info-area">
     <div class="button-container">
-        <a class="button info-button">
+        <a class="button info-button waves-effect waves-light modal-trigger" href="#modal1">
             <img src="img/info-solid.svg">
         </a>
+
     </div>
+
     <div class="apis-container">
         <ul>
             <li>
@@ -93,81 +166,13 @@
     </div>
 
     <div class="modal-mobile-container">
-    <div class="modal-mobile">
-        <p class="base-text">
-            Girá tu dispositivo para disfrutar de FADU viva.
-        </p>
-        <img class="cellphone" src="img/cellphone.svg">
-    </div>
-        <div class="overlay-mobile"></div>
-    </div>
-
-    <div class="modal-info-container">
-        <div class="modal-info">
-            <a class="close-button"><p class="close-button-content">+</p></a>
-            <div class="border-container">
-                <p class="title">
-                    Fadu Viva es una ventana a lo que sucede en
-                    Ciudad Universitaria en tiempo real
-                </p>
-                <div class="content">
-                    <p class="base-text">
-                        Se trata de una “postal animada” que rinde homenaje a la FADU creada por diseñadores y
-                        programadores
-                        en
-                        conjunto.
-                    </p>
-                    <div class="border-content">
-                        <div class="list-container">
-                            <p class="base-text">
-                                Este proyecto surge en nuestro espacio de experimentación llamado EryxLabs y su valor
-                                radica
-                                en
-                                la interacción entre elementos que brindan datos en tiempo real (APIs) con
-                                ilustraciones.
-                            </p>
-                            <p class="base-text">
-                                Las animaciones aportan información sobre:
-                            </p>
-                            <ul>
-                                <li>
-                                    <p class="base-text">
-                                        El estado del tránsito
-                                    </p>
-                                </li>
-                                <li>
-                                    <p class="base-text">
-                                        El clima
-                                    </p>
-                                </li>
-                                <li>
-                                    <p class="base-text">
-                                        La frecuencia de los colectivos
-                                    </p>
-                                </li>
-                                <li>
-                                    <p class="base-text">
-                                        Y proximamente: frecuencia de trenes, de vuelos y estaciones del año.
-                                    </p>
-                                </li>
-                            </ul>
-                            <p class="base-text">
-                                Gracias a esto, cada vez que ingreses va a estar sucediendo algo distinto.
-                            </p>
-                        </div>
-                        <div class="img-container">
-                            <img src="img/banquito-fadu.svg">
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <div class="logo">
-                <img src="img/logo.svg">
-            </div>
-            <a class="close-btn"></a>
+        <div class="modal-mobile">
+            <p class="base-text">
+                Girá tu dispositivo para disfrutar de FADU viva.
+            </p>
+            <img class="cellphone" src="img/cellphone.svg">
         </div>
-        <div class="overlay"></div>
+        <div class="overlay-mobile"></div>
     </div>
 
 </div>
@@ -197,22 +202,19 @@
     ga('send', 'pageview')
 </script>
 <script src="https://www.google-analytics.com/analytics.js" async></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
 
 <script>
 
-    /*------------ funciones para mostrar y ocultar el modal -----------------*/
-    function showInfoModal() {
-        $(".modal-info, .overlay").removeClass("desappear");
-        $(".modal-info, .overlay").addClass("show");
-        $(".info-button").addClass("dark");
-    }
+    $(document).ready(function () {
+        $('.modal').modal();
+    });
 
-    function hideInfoModal() {
-        $(".modal-info, .overlay").removeClass("show");
-        $(".modal-info, .overlay").addClass("desappear");
-        $(".info-button").removeClass("dark");
-    }
+
+
+
+    /*------------ funciones para mostrar y ocultar el modal -----------------*/
 
     function showRotateMobileMessage() {
         $(".logo-link").hide();
@@ -230,16 +232,13 @@
         $(".modal-mobile, .overlay-mobile").addClass("desappear");
     }
 
-    $(".info-button").click(showInfoModal);
-    $(".close-button, .overlay").click(hideInfoModal);
-
     /*------------ funciones para el modal en posicion vertical -----------------*/
 
     const browserIsMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    if(browserIsMobile) {
+    if (browserIsMobile) {
         function rotateMessageWhenMobileIsInPortrait() {
             if (window.orientation & 2) {
-                // Do something if in landscape mode
+// Do something if in landscape mode
                 hideRotateMobileMessage();
             } else {
                 // Do something if in portrait mode
@@ -247,7 +246,7 @@
             }
         }
 
-        window.addEventListener('orientationchange', function() {
+        window.addEventListener('orientationchange', function () {
             rotateMessageWhenMobileIsInPortrait();
         }, false);
 
@@ -262,3 +261,4 @@
 </body>
 
 </html>
+

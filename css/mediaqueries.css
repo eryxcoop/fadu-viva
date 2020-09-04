@@ -1,5 +1,10 @@
 /* Modal mobile  */
 
+@media only screen and (min-width: 768px) {
+    .modal-info-container {
+        width: auto !important;
+    }
+}
 @media only screen and (max-width: 768px) {
     .list-container {
         width: auto;
@@ -8,27 +13,12 @@
         display: none;
     }
 
-    .border-container p{
-        font-size: 14px;
-    }
-
-    .modal-info {
-        padding: 10px 20px 20px;
-        margin: 50px 10px 30px;
-        height: fit-content;
-    }
-
-    .list-container ul{
-        width: 60%;
-    }
     .modal-info-container .title {
         font-size: 1.1em;
     }
 
     .close-button{
         position: fixed;
-        top: 65px;
-        right: 30px;
     }
 
 
@@ -59,11 +49,3 @@
 
 
 }
-
-/*@media (min-height: 320px) {*/
-    /*.modal-info {*/
-        /*max-height: 310px;*/
-        /*overflow-x: hidden;*/
-        /*overflow-y: auto;*/
-    /*}*/
-/*}*/
