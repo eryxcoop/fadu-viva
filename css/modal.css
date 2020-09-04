@@ -87,7 +87,7 @@ li .base-text{
 
 .logo {
     transform: translateY(2.5em);
-    background: #ffffff;
+    background: #fafafa;
     padding: 0 10px;
 }
 
@@ -98,7 +98,7 @@ li .base-text{
 
 .close-button{
     position: absolute;
-    background-color: #ffffff;
+    background-color: #fafafa;
     height: 40px;
     width: 40px;
     right: 20px;
