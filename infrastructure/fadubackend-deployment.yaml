@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fadu-viva-deployment
+  labels:
+    app: fadu-viva
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fadu-viva
+  template:
+    metadata:
+      labels:
+        app: fadu-viva
+    spec:
+      containers:
+      - name: fadu-viva
+        image: eryxcoop/fadu-viva
+        ports:
+        - containerPort: 80

@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: fadu-viva-ingress
+  annotations:
+    kubernetes.io/tls-acme: "true"
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  rules:
+    - host: fadu-viva.k8s.eryx.co
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: fadu-viva-service
+              servicePort: 80
+  tls:
+    - hosts:
+        - fadu-viva.k8s.eryx.co
+      secretName: fadu-viva-tls
